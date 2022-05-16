@@ -3,7 +3,7 @@ import React from 'react';
 import Link from '../Components/LowerCaseUrlLink';
 import { useIntl } from 'react-intl';
 import { Cafe } from '../Models/cafe';
-import { useOptimizedImage } from '../Hooks/useOptimizedImage';
+import OptimizedImage from './OptimizedImage';
 
 interface TestOurCoffeeProps {
   cafes: Cafe[];
@@ -23,15 +23,13 @@ const TasteOurCoffee: React.FC<TestOurCoffeeProps> = (props) => {
           <Link to={`/${language}/cafes`} className="ourcoffee-tile-link">
             <h2 className="ourcoffee-tile-text center-text">{name}</h2>
             <span className="cafe-overlay"> </span>
-            <img
-              alt={name}
-              className="ourcoffee-tile-image"
-              src={useOptimizedImage(
-                imageLink,
-                imageWidth as number,
-                imageHeight as number
-              )}
+            <OptimizedImage
               title={name}
+              classname={'ourcoffee-tile-image'}
+              altContent={name}
+              imageUrl={imageLink}
+              imageWidth={imageWidth as number}
+              imageHeight={imageHeight as number}
             />
           </Link>
         </div>

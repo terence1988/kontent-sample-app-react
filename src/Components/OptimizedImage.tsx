@@ -1,11 +1,24 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { resizeImage } from '../Utilities/ResizeImage';
 
-export function useOptimizedImage(
-  imageUrl: string | 0,
-  imageWidth: number,
-  imageHeight: number
-): string {
+type OptimizedImageProps = {
+  imageUrl: string;
+  imageWidth: number;
+  imageHeight: number;
+  altContent?: string;
+  title?: string;
+  classname?: string;
+};
+
+const OptimizedImage = ({
+  imageUrl,
+  imageWidth,
+  imageHeight,
+  altContent,
+  title,
+  classname,
+}: OptimizedImageProps): JSX.Element => {
   const [optimizedImageUrl, setOptimizedImageUrl] = useState<string | 0>();
   useEffect(() => {
     const originalImage = new Image();
@@ -25,5 +38,14 @@ export function useOptimizedImage(
       originalImage.removeEventListener('load', imagedLoaded);
     };
   }, [imageUrl, imageHeight, imageWidth]);
-  return optimizedImageUrl as string;
-}
+  return (
+    <img
+      alt={altContent}
+      className={classname}
+      src={optimizedImageUrl as string}
+      title={title}
+    />
+  );
+};
+
+export default OptimizedImage;
