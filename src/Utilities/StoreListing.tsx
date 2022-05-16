@@ -5,6 +5,7 @@ const formatPrice = (price: number, language: string): string => {
   return price.toLocaleString(language, {
     style: 'currency',
     currency: 'USD',
+    maximumFractionDigits: 2,
   });
 };
 

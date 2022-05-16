@@ -2,6 +2,7 @@ import React from 'react';
 import Link from '../Components/LowerCaseUrlLink';
 import { FormattedDate, useIntl } from 'react-intl';
 import { Article } from '../Models/article';
+import { useOptimizedImage } from '../Hooks/useOptimizedImage';
 
 interface LatestArticlesProps {
   articles: Article[];
@@ -21,20 +22,6 @@ const LatestArticles: React.FC<LatestArticlesProps> = (props) => {
           ? article.elements.title.value
           : formatMessage({ id: 'LatestArticles.noTitleValue' });
 
-      const imageLink =
-        article.elements.teaserImage.value[0] !== undefined ? (
-          <img
-            alt={'Article ' + title}
-            className="article-tile-image"
-            src={article.elements.teaserImage.value[0].url}
-            title={'Article ' + title}
-          />
-        ) : (
-          <div className="article-tile-image placeholder-tile-image">
-            {formatMessage({ id: 'LatestArticles.noTeaserValue' })}
-          </div>
-        );
-
       const summary =
         article.elements.summary.value.trim().length > 0
           ? article.elements.summary.value
@@ -45,7 +32,25 @@ const LatestArticles: React.FC<LatestArticlesProps> = (props) => {
       return (
         <div className="col-md-3" key={index}>
           <div className="article-tile">
-            <Link to={link}>{imageLink}</Link>
+            <Link to={link}>
+              {article.elements.teaserImage.value[0] !== undefined ? (
+                <img
+                  alt={'Article ' + title}
+                  className="article-tile-image"
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
+                  src={useOptimizedImage(
+                    article.elements.teaserImage.value[0].url,
+                    article.elements.teaserImage.value[0].width as number,
+                    article.elements.teaserImage.value[0].height as number
+                  )}
+                  title={'Article ' + title}
+                />
+              ) : (
+                <div className="article-tile-image placeholder-tile-image">
+                  {formatMessage({ id: 'LatestArticles.noTeaserValue' })}
+                </div>
+              )}
+            </Link>
             <div className="article-tile-date">
               <FormattedDate
                 value={article.elements.postDate.value!!}
@@ -76,7 +81,12 @@ const LatestArticles: React.FC<LatestArticlesProps> = (props) => {
       <img
         alt={'Article ' + title}
         className="article-tile-image"
-        src={articleElements.teaserImage.value[0].url}
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        src={useOptimizedImage(
+          articleElements.teaserImage.value[0].url,
+          articleElements.teaserImage.value[0].width as number,
+          articleElements.teaserImage.value[0].height as number
+        )}
         title={'Article ' + title}
       />
     ) : (

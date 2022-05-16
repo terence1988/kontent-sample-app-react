@@ -19,6 +19,7 @@
     "cross-env": "^7.0.2",
     "lint-staged": "^10.2.7",
     "prettier": "^2.0.5",
+    "react-app-rewired": "^2.2.1",
     "react-scripts": "^5.0.1"
   },
   "dependencies": {
@@ -37,7 +38,7 @@
   "scripts": {
     "lint": "eslint & prettier . --check",
     "start": "react-scripts start",
-    "build": "cross-env CI=true react-scripts build && cpy build/index.html build --rename=200.html",
+    "build": "cross-env CI=true react-app-rewired build && cpy build/index.html build --rename=200.html",
     "test-watch": "react-scripts test --env=jsdom",
     "test": "cross-env CI=true react-scripts test --env=jsdom --passWithNoTests"
   },

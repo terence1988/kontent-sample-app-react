@@ -13,6 +13,7 @@ import { ITaxonomyTerms } from '@kentico/kontent-delivery';
 import { useIntl } from 'react-intl';
 import { Brewer } from '../Models/brewer';
 import { projectModel } from '../Models/_project';
+import { formatPrice } from '../Utilities/StoreListing';
 
 interface filterType {
   [index: string]: string[];
@@ -99,14 +100,6 @@ const BrewerStoreContainer: React.FC = () => {
     return ranges.some(
       (priceRange) => priceRange.min <= price && price <= priceRange.max
     );
-  };
-
-  const formatPrice = (price: number, language: string): string => {
-    return price.toLocaleString(language, {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 2,
-    });
   };
 
   const toggleFilter = (filterName: string, filterValue: string): void => {
