@@ -8,6 +8,7 @@ interface SpinnerLayoutProps {
 const SpinnerLayout: React.FC<SpinnerLayoutProps> = ({ children }) => {
   return (
     <div id="spinnerBox">
+      {/*@ts-ignore*/}
       <Spinner name="apiSpinner" show={false}>
         <div className="loader-bg">
           <div className="loader" />

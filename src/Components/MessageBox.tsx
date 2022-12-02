@@ -22,7 +22,7 @@ const MessageBox: React.FC<MessageBoxProps> = (props) => {
                 <img src={infoImage} height="44" width="44" alt="info icon" />
               </td>
               <td className="message-content">
-                <p>{props.message}</p>
+                <p>{props.message as string}</p>
               </td>
             </tr>
           </tbody>
